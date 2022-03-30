@@ -22,6 +22,7 @@
 #define minus cout<<-1<<endl
 #define MAX 100000
 using namespace std;
+// create a node
 template<typename T>
 class List
 {
@@ -34,6 +35,7 @@ public:
         this->next=NULL;
     }
 };
+// insert node at the end
 template<typename T>
 void ListInsert(List<T>* head,T data)
 {
@@ -52,6 +54,7 @@ void ListInsert(List<T>* head,T data)
         tmp->next=new List<T>(data);
     }
 }
+// insert node at nth position
 template<typename T>
 List<T>* ListInsert(List<T>* head,T data,int pos)
 {
@@ -75,6 +78,7 @@ List<T>* ListInsert(List<T>* head,T data,int pos)
     }
     return head;
 }
+// delete the last node
 template<typename T>
 void ListDelete(List<T>* head)
 {
@@ -94,6 +98,7 @@ void ListDelete(List<T>* head)
         delete tmp2 ;
     }
 }
+// delete nth node
 template<typename T>
 List<T>* ListDelete(List<T>* head,int pos)
 {
@@ -117,6 +122,7 @@ List<T>* ListDelete(List<T>* head,int pos)
     }
     return head;
 }
+// print the list
 template<typename T>
 void ListPrint(List<T>* head)
 {
@@ -128,6 +134,7 @@ void ListPrint(List<T>* head)
     }
     cout<<endl;
 }
+// reverse the linked list iteratively
 template<typename T>
 List<T>* ListReverse(List<T>* head)
 {
@@ -143,6 +150,7 @@ List<T>* ListReverse(List<T>* head)
     }
     return head;
 }
+// reverse the list using recursion
 template<typename T>
 List<T>* ListReverseRecursion(List<T>* head,List<T>* p)
 {
@@ -170,9 +178,6 @@ void solve()
 int main()
 {
     fast;
-//    int t;
-//    cin>>t;
-//    while(t--)
-        solve();
+    solve();
     return 0;
 }
