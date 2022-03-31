@@ -72,6 +72,7 @@ List<T>* ListInsert(List<T>* head,T data,int pos)
             if(tmp==NULL) return head;
             tmp=tmp->next;
         }
+        if(tmp==NULL) return head;
         List<T>* tmp2=tmp->next;
         tmp->next=new List<T>(data);
         tmp->next->next=tmp2;
@@ -182,8 +183,10 @@ void solve()
     head=ListDelete(head);
     head=ListDelete(head);
     head=ListDelete(head,0);
-    head=ListDelete(head,100);
+    head=ListDelete(head,1);
     head=ListInsert(head,10);
+    head=ListInsert(head,20,1);
+//    head=ListInsert(head,100,0);
 //    head=ListReverse(head);
 //    head=ListReverseRecursion(head,head);
     ListPrint(head);
