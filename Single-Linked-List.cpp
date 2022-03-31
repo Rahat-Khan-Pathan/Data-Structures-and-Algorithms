@@ -37,12 +37,11 @@ public:
 };
 // insert node at the end
 template<typename T>
-void ListInsert(List<T>* head,T data)
+List<T>* ListInsert(List<T>* head,T data)
 {
     if(head==NULL)
     {
-        head->data=data;
-        head->next=NULL;
+        head=new List<T>(data);
     }
     else
     {
@@ -53,6 +52,7 @@ void ListInsert(List<T>* head,T data)
         }
         tmp->next=new List<T>(data);
     }
+    return head;
 }
 // insert node at nth position
 template<typename T>
@@ -80,11 +80,13 @@ List<T>* ListInsert(List<T>* head,T data,int pos)
 }
 // delete the last node
 template<typename T>
-void ListDelete(List<T>* head)
+List<T>* ListDelete(List<T>* head)
 {
-    if(head==NULL)
+    if(head==NULL) return head;
+    if(head->next==NULL)
     {
-        return;
+        delete head;
+        return NULL;
     }
     else
     {
@@ -97,11 +99,13 @@ void ListDelete(List<T>* head)
         tmp->next=NULL;
         delete tmp2 ;
     }
+    return head;
 }
 // delete nth node
 template<typename T>
 List<T>* ListDelete(List<T>* head,int pos)
 {
+    if(head==NULL) return head;
     List<T>* tmp=head;
     if(pos==0)
     {
@@ -126,6 +130,7 @@ List<T>* ListDelete(List<T>* head,int pos)
 template<typename T>
 void ListPrint(List<T>* head)
 {
+    if(head==NULL) return;
     List<T>* tmp=head;
     while(tmp!=NULL)
     {
@@ -138,6 +143,7 @@ void ListPrint(List<T>* head)
 template<typename T>
 List<T>* ListReverse(List<T>* head)
 {
+    if(head==NULL) return head;
     List<T>* tmp=head;
     List<T>* prev=NULL;
     while(tmp!=NULL)
@@ -154,6 +160,7 @@ List<T>* ListReverse(List<T>* head)
 template<typename T>
 List<T>* ListReverseRecursion(List<T>* head,List<T>* p)
 {
+    if(head==NULL) return head;
     if(p->next==NULL)
     {
         head=p;
@@ -167,12 +174,18 @@ List<T>* ListReverseRecursion(List<T>* head,List<T>* p)
 void solve()
 {
     List<int>*head=new List<int>(2);
-    ListInsert(head,5);
-    ListInsert(head,10);
+    head=ListInsert(head,5);
+    head=ListInsert(head,10);
     head=ListInsert(head,20,0);
-//    head=ListDelete(head,0);
+    head=ListDelete(head,0);
+    head=ListDelete(head,0);
+    head=ListDelete(head);
+    head=ListDelete(head);
+    head=ListDelete(head,0);
+    head=ListDelete(head,100);
+    head=ListInsert(head,10);
 //    head=ListReverse(head);
-    head=ListReverseRecursion(head,head);
+//    head=ListReverseRecursion(head,head);
     ListPrint(head);
 }
 int main()
