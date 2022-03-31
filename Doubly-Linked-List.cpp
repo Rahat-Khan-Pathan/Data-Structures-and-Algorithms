@@ -66,7 +66,7 @@ List<T>* ListInsert(List<T>* head,T data,int pos)
     {
         head=new List<T>(data);
         head->next=tmp;
-        head->next->prev=head;
+        if(head->next!=NULL) head->next->prev=head;
     }
     else
     {
@@ -76,11 +76,12 @@ List<T>* ListInsert(List<T>* head,T data,int pos)
             if(tmp==NULL) return head;
             tmp=tmp->next;
         }
+        if(tmp==NULL) return head;
         List<T>* tmp2=tmp->next;
         tmp->next=new List<T>(data);
         tmp->next->next=tmp2;
         tmp->next->prev=tmp;
-        tmp->next->next->prev=tmp->next;
+        if(tmp->next->next!=NULL) tmp->next->next->prev=tmp->next;
     }
     return head;
 }
@@ -111,7 +112,7 @@ List<T>* ListDelete(List<T>* head,int pos)
     if(pos==0)
     {
         tmp=tmp->next;
-        tmp->prev=NULL;
+        if(tmp!=NULL) tmp->prev=NULL;
         delete head;
         return tmp;
     }
@@ -122,6 +123,7 @@ List<T>* ListDelete(List<T>* head,int pos)
             if(tmp==NULL) return head;
             tmp=tmp->next;
         }
+        if(tmp==NULL) return head;
         tmp->prev->next=tmp->next;
         tmp->next->prev=tmp->prev;
         delete tmp;
@@ -169,6 +171,7 @@ List<T>* ListReverse(List<T>* head)
 template<typename T>
 List<T>* ListReverseRecursion(List<T>* head,List<T>* p)
 {
+    if(head==NULL) return head;
     if(p->next==NULL)
     {
         List<T>* prev=p->prev;
@@ -197,7 +200,10 @@ void solve()
     head=ListDelete(head);
     head=ListDelete(head);
     head=ListInsert(head,20);
-    head=ListInsert(head,10,0);
+    head=ListDelete(head,1);
+    head=ListInsert(head,40,1);
+//    head=ListInsert(head,10,1);
+//    head=ListInsert(head,10);
 //    head=ListReverse(head);
     head=ListReverseRecursion(head,head);
     ListPrint(head);
