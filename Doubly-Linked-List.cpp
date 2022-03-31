@@ -39,13 +39,11 @@ public:
 };
 // insert node at the end
 template<typename T>
-void ListInsert(List<T>* head,T data)
+List<T>* ListInsert(List<T>* head,T data)
 {
     if(head==NULL)
     {
-        head->data=data;
-        head->next=NULL;
-        head->prev=NULL;
+        head=new List<T>(data);
     }
     else
     {
@@ -57,6 +55,7 @@ void ListInsert(List<T>* head,T data)
         tmp->next=new List<T>(data);
         tmp->next->prev=tmp;
     }
+    return head;
 }
 // insert node at nth position
 template<typename T>
@@ -89,10 +88,7 @@ List<T>* ListInsert(List<T>* head,T data,int pos)
 template<typename T>
 List<T>* ListDelete(List<T>* head)
 {
-    if(head==NULL)
-    {
-        return head;
-    }
+    if(head==NULL) return NULL;
     else
     {
         List<T>* tmp=head;
@@ -100,7 +96,8 @@ List<T>* ListDelete(List<T>* head)
         {
             tmp=tmp->next;
         }
-        tmp->prev->next=NULL;
+        if(tmp->prev!=NULL) tmp->prev->next=NULL;
+        else return NULL;
         delete tmp;
     }
     return head;
@@ -110,6 +107,7 @@ template<typename T>
 List<T>* ListDelete(List<T>* head,int pos)
 {
     List<T>* tmp=head;
+    if(head==NULL) return NULL;
     if(pos==0)
     {
         tmp=tmp->next;
@@ -135,6 +133,7 @@ template<typename T>
 void ListPrint(List<T>* head)
 {
     List<T>* tmp=head;
+    if(head==NULL) return;
     while(tmp->next!=NULL)
     {
         cout<<tmp->data<<" ";
@@ -192,7 +191,13 @@ void solve()
     ListInsert(head,5);
     ListInsert(head,10);
     head=ListInsert(head,20,0);
-//    head=ListDelete(head,0);
+    head=ListDelete(head);
+    head=ListDelete(head);
+    head=ListDelete(head);
+    head=ListDelete(head);
+    head=ListDelete(head);
+    head=ListInsert(head,20);
+    head=ListInsert(head,10,0);
 //    head=ListReverse(head);
     head=ListReverseRecursion(head,head);
     ListPrint(head);
